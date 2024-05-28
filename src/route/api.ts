@@ -19,3 +19,6 @@ apiRouter.get("/api/products/:slug", authMiddleware, ProductController.get);
 
 // Order API
 apiRouter.get("/api/orders", authMiddleware, OrderController.list);
+apiRouter.post("/api/orders/", authMiddleware, OrderController.create);
+apiRouter.get("/api/orders/:orderId", authMiddleware, OrderController.get);
+apiRouter.patch("/api/orders/:orderId", authMiddleware, OrderController.pay);

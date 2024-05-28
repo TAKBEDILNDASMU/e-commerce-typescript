@@ -19,6 +19,6 @@ export const toSeedResponse = (
   return {
     createdProduct: products.map((product) => toProductResponse(product)),
     createdUser: users.map((user) => toUserResponse(user)),
-    createdOrder: toOrderResponse(orders),
+    createdOrder: orders.map((order) => toOrderResponse(order)),
   };
 };

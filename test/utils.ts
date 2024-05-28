@@ -5,7 +5,8 @@ import { web } from "../src/app/web";
 import Product, { ProductInterface } from "../src/model/Product";
 import { sampleProducts } from "../src/data";
 import Order from "../src/model/Order";
-import mongoose from "mongoose";
+import mongoose, { ObjectId } from "mongoose";
+import { orderResponse, toOrderResponse } from "../src/model/order-model";
 
 export class UserTest {
   static async createOne() {
@@ -96,6 +97,19 @@ export class OrderTest {
       orderAt: new Date(),
       user: user._id,
     });
+  }
+
+  static async get(): Promise<ObjectId> {
+    // get user test id first
+    const user = await UserTest.get();
+
+    const order = await Order.findOne({ user: user._id });
+
+    if (!order) {
+      throw new Error("Order is not found");
+    }
+
+    return order._id;
   }
 
   static async deleteAll() {
